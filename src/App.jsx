@@ -6,11 +6,8 @@ import { setCalculating, setData, setRawData } from './redux/homeSlice'
 
 const App = () => {
   const dispatch=useDispatch()
-  // const data=useSelector((state)=>state.home.data)
-  // const rawData=useSelector((state)=>state.home.rawData)
-  // const[rawData,setRawData]=useState([])
- 
 
+  //FETCHING DATA FROM CSV
   useEffect(()=>{
     dispatch(setCalculating(true))
       fetchData()
@@ -31,8 +28,9 @@ const App = () => {
   
           if (res.status === 200) {
               const data = await res.text();
+              //SAVE RAW DATA OF CSV
              dispatch( setRawData(data))
-              // console.log(data);
+             //CONVERT RAW DATA TO JSON AND SAVE
               dispatch(setData(csvJSON(data)))
              
 
@@ -44,6 +42,8 @@ const App = () => {
           console.log(err)
       }
   }
+
+  //FUNCTION FOR CONVERTING CSV RAW DATA TO JSON
   function csvJSON(csv){
   
       var lines=csv.split("\n");

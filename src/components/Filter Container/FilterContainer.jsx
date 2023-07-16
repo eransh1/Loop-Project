@@ -19,6 +19,7 @@ const FilterContainer = () => {
 
     const dispatch=useDispatch()
 
+//THE RAW DATA THAT WE GOT INITIALLY IS USED TO GET UNIQUE COLUMN ITMEMS FOR FILTER PURPOSE
 useEffect(()=>{
   dispatch(setCalculating(true))
 if(rawData.length===0){return}
@@ -30,6 +31,7 @@ dispatch(setCalculating(false))
 },[rawData])
 
 
+//HERE DEPENDING UPON FILTER APPLIED FINAL ROWS THAT NEED TO BE SHOWN IS CALCULATED
 useEffect(()=>{
   dispatch(setCalculating(true))
   dispatch(setPageNumber(0))
@@ -93,10 +95,11 @@ dispatch(setCalculating(false))
     return
    
 }
-
 //eslint-disable-next-line
 },[filteredArrayForMod3,filteredArrayForMod4,filteredArrayForMod5,data])
 
+
+//THIS FUNCTION IS USED TO GET UNIQUE LIST FROM RAW DATA FORMAT OF CSV
 function getUniqueValuesFromCSV(csv, columnName) {
     // Split the CSV into rows
     const rows = csv.split('\n');
@@ -117,6 +120,8 @@ function getUniqueValuesFromCSV(csv, columnName) {
     return uniqueArray.filter((item)=>{return item!==undefined});
   }
 
+
+  //THIS FUNCTION IS USED TO CONVERT JSON FORMAT TO RAW DATA FORMAT OF CSV
   function convertArrayOfObjectsToCSV(data) {
     const csvRows = [];
     
@@ -133,7 +138,6 @@ function getUniqueValuesFromCSV(csv, columnName) {
       });
       csvRows.push(values.join(','));
     }
-    
     // Combining all rows into a single CSV string
     return csvRows.join('\n');
   }

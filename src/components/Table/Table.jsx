@@ -17,6 +17,7 @@ const Table = () => {
 
 const pageCount=Math.ceil(data.length/rowsPerPage)
 
+
 const changePage=({selected})=>{
     setRowsToShow([])
     setDisplayRows([])
@@ -27,6 +28,8 @@ const changePage=({selected})=>{
       dispatch(setPageNumber(selected))
     }
 
+
+//PAGINATION IS DONE HERE BASED ON TOTAL ROWS    
 useEffect(()=>{
     if(data.length===0){return}
     const tempRowsArray=data?.slice(pagesVisited,pagesVisited+rowsPerPage)
@@ -34,16 +37,22 @@ useEffect(()=>{
    //eslint-disable-next-line
 },[data,pageNumber])
 
+
+//SLICE THE TOTAL ROWS TO SHOW TO JUST 20 AS REQUIRED
 useEffect(()=>{
     if(displayRows.length===0){return}
 setRowsToShow(displayRows.slice(0,20))
 },[displayRows])
 
+
+//FETCH NEXT 20 ROWS
 const fetchMoreRows = async(number) => {
 let newShowArr = rowsToShow.concat(displayRows.slice(number, number + 20))
 setRowsToShow(newShowArr)
 }
 
+
+//ADD EVENT LISTNER TO CONTAINER SO THAT WHEN IT REACH THE END WE CAN TRIGGER FUNCTION
 setTimeout(()=>{
 
     let element = document.querySelector(`.${styles.dependency_table}`);
@@ -82,7 +91,6 @@ setTimeout(()=>{
                                 <td className={styles.tableColumn} style={{textTransform:"capitalize"}}>{item.mod350 ? item.mod350 : "Not Available"}</td>
                                 <td className={styles.tableColumn} style={{textTransform:"capitalize"}}>{item.mod8000 ? item.mod8000 : "Not Available"}</td> 
                                 <td className={styles.tableColumn} style={{textTransform:"capitalize"}}>{item.mod20002 ? item.mod20002 : "Not Available"}</td>    
-                                {/* <td className={styles.tableColumn} style={{textTransform:"capitalize"}}>{item.mod6 ? item.mod6 : "Not Available"}</td>                                */}
                             </tr>
                         
                             </>
