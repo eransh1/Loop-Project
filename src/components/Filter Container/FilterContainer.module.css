@@ -1,0 +1,10 @@
+.outerCont{
+    width: 97%;
+    height: fit-content;
+ 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 3rem 1rem;
+}
